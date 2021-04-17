@@ -1,0 +1,6 @@
+{
+    "Configuration": {
+        "host": "localhost",
+        "database": "playground"
+    }
+}
