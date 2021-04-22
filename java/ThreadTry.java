@@ -1,6 +1,6 @@
-public class Main implements Runnable {
+public class ThreadTry implements Runnable {
   public static void main(String[] args) {
-    Main tain = new Main();
+    ThreadTry tain = new ThreadTry();
 
     Thread thread = new Thread(tain);
     thread.start();
