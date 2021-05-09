@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
 import Input from './Input';
+import Select from './Select';
 
 class Form extends Component {
   state = { 
@@ -10,8 +11,9 @@ class Form extends Component {
   validateProperty = ({name, value}) => {
     const obj = {[name]: value};
     const schema = {[name]: this.schema[name]};
-    const {error} = Joi.validate(obj, schema);
-    return error ? error.detalis[0].message : null;
+    console.log(schema, obj);
+    const {error} = Joi.validate(obj, schema, { abortEarly: false });
+    return error ? error.details[0].message : null;
   }
   
   validate = () => {
@@ -30,10 +32,12 @@ class Form extends Component {
   handleChange = ({currentTarget: input}) => {
     const errors = {...this.state.errors};
     const errorMessage = this.validateProperty(input);
-    if(errorMessage) error[input.name] = errorMessage;
+    if(errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
-    this.setState({errors});
+    const data = {...this.state.data};
+    data[input.name] = input.value;
+    this.setState({errors, data});
   }
 
   handleSubmit = e =>{
@@ -52,7 +56,7 @@ class Form extends Component {
     );
   }
 
-  renderInput = ({name, label, type="text"}) => {
+  renderInput = (name, label, type="text") => {
     const {data, errors} = this.state;
 
     return (
@@ -63,6 +67,21 @@ class Form extends Component {
       error={errors[name]} 
       label={label} 
       type={type}
+      onChange={this.handleChange} />
+    );
+  }
+  
+  renderSelect = (name, label, options) => {
+    const {data, errors} = this.state;
+  
+    return (
+      <Select
+      options={options}
+      id={name}
+      name={name} 
+      value={data[name]} 
+      error={errors[name]} 
+      label={label} 
       onChange={this.handleChange} />
     );
   }
