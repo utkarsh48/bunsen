@@ -1,4 +1,4 @@
-package com.ut.dsa.arrays;
+package com.ut.dsa;
 
 public class Array {
   private int[] items;
@@ -8,9 +8,34 @@ public class Array {
     this.items = new int[size];
   }
 
-  public void insert(int value) { // O(n)
-    System.out.println("\ninsert " + value);
+  public static void main(String[] args) {
+    Array arr = new Array(3);
+    arr.insert(10);
+    arr.insert(20);
+    arr.insert(30);
+    arr.print();
+    arr.removeAt(0);
+    arr.insert(40);
+    arr.insert(50);
+    arr.print();
+    System.out.println(arr.indexOf(50));
+    System.out.println(arr.max());
+    System.out.println(arr.size());
+    arr.print();
+    arr.insertAt(90, 0);
+    arr.print();
 
+    Array arr2 = new Array(5);
+    arr2.insert(2);
+    arr2.insert(20);
+    arr2.insert(20);
+    arr2.insert(90);
+
+    Array result = arr.intersect(arr2);
+    result.print();
+  }
+
+  public void insert(int value) { // O(n)
     if (this.count == this.items.length) {
       // new temp array
       int[] temp = new int[this.count * 2];
@@ -27,8 +52,6 @@ public class Array {
   }
 
   public void removeAt(int index) { // O(n)
-    System.out.println("\nremoveAt " + index);
-
     // input validation
     if (index < 0 || index >= this.count)
       throw new IllegalArgumentException();
@@ -42,8 +65,6 @@ public class Array {
   }
 
   public int indexOf(int item) { // O(n)
-    System.out.println("\nindexOf " + item);
-
     for (int i = 0; i < this.count; i++)
       if (this.items[i] == item)
         return i;
@@ -52,8 +73,6 @@ public class Array {
   }
 
   public int max() { // O(n)
-    System.out.println("\nmax");
-
     int max = this.items[0];
     for (int i = 1; i < this.count; i++)
       if (max < this.items[i])
@@ -63,8 +82,6 @@ public class Array {
   }
 
   public Array intersect(Array arr) { // O(n^2)
-    System.out.println("\nintersect");
-
     int maxLength = this.count > arr.count ? this.count : arr.count;
     Array temp = new Array(maxLength);
     for (int i = 0; i < this.count; i++)
@@ -75,8 +92,6 @@ public class Array {
   }
 
   public void reverse() { // O(n)
-    System.out.println("\nreverse");
-
     int[] temp = new int[this.count];
     for (int i = this.count - 1; i >= 0; i--) {
       temp[i] = this.items[i];
@@ -85,8 +100,6 @@ public class Array {
   }
 
   public void insertAt(int item, int index) { // O(n)
-    System.out.println("\n" + item + " insertAt " + index);
-
     if (index < 0 || index > this.count)
       throw new IllegalArgumentException();
 
@@ -112,14 +125,11 @@ public class Array {
   }
 
   public void print() { // O(n)
-    System.out.println("\nprint");
-
     for (int i = 0; i < this.count; i++)
       System.out.println(this.items[i]);
   }
 
   public int size() { // O(1)
-    System.out.println("\nsize");
     return count;
   }
 }
