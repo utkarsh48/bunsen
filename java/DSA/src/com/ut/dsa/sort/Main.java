@@ -9,8 +9,10 @@ public class Main {
     // SelectionSort sorter = new SelectionSort();
     // InsertionSort sorter = new InsertionSort();
     // MergeSort sorter = new MergeSort();
-    QuickSort sorter = new QuickSort();
-    sorter.sort(arr);
+    // QuickSort sorter = new QuickSort();
+    // CountingSort sorter = new CountingSort();
+    BucketSort sorter = new BucketSort();
+    sorter.sort(arr, 3);
     System.out.println(Arrays.toString(arr));
   }
 }
